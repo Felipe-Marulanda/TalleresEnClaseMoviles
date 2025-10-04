@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'routes/app_router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -251,4 +252,9 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
+
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: appRouter,
+    );
+  }
