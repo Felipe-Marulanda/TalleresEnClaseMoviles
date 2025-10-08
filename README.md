@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+# TalleresEnClaseMoviles
+nada por el momento
+=======
 # Taller2 Navegación y Ciclo de Vida
 
 ## Descripción
@@ -135,3 +139,4 @@ Amarillo y verde predominantes.
 Botones con íconos e imágenes decorativas.
 
 Estilo alegre y llamativo en las pantallas.
+>>>>>>> cd8a3883f7a8519724e6b2b2c66da44b693f4876
