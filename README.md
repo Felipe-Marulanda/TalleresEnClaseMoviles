@@ -1,142 +1,109 @@
-<<<<<<< HEAD
-# TalleresEnClaseMoviles
-nada por el momento
-=======
-# Taller2 Navegación y Ciclo de Vida
+# Taller HTTP y Navegación con GoRouter
 
-## Descripción
-Este proyecto implementa navegación con **go_router**, paso de parámetros entre pantallas, uso de diferentes widgets intermedios y evidencia del ciclo de vida de un **StatefulWidget**.  
-El objetivo es comprender las diferencias entre `go`, `push` y `replace`, el envío de datos entre pantallas y el momento de ejecución de los métodos principales de un widget con estado.
+Aplicación Flutter que consume la API pública [TheMealDB](https://www.themealdb.com/) para mostrar un recetario, explica diferentes formas de navegación con **go_router** y reúne demos de asincronía, isolates, timers y ciclo de vida de widgets.
 
 ---
 
-## Arquitectura / Navegación
-La navegación está implementada con **go_router**, definiendo un conjunto de rutas principales:
+## 🛰️ API consumida
 
-- `/` → **HomeScreen**  
-  Pantalla principal con botones de navegación.
+- **Endpoint base:** `https://www.themealdb.com/api/json/v1/1/search.php?s=`
+- **Descripción:** devuelve un listado de recetas; el parámetro `s` permite filtrar por texto (vacío trae 25 recetas destacadas).
+- **Ejemplo de respuesta (fragmento):**
 
-- `/detalle/:valor` → **DetalleScreen**  
-  Pantalla que recibe un parámetro dinámico (`valor`) desde el Home y lo muestra en la interfaz.
-    - Ejemplo: `/detalle/123` muestra el detalle del parámetro `123`.
+```json
+{
+  "meals": [
+    {
+      "idMeal": "52940",
+      "strMeal": "Brown Stew Chicken",
+      "strCategory": "Chicken",
+      "strArea": "Jamaican",
+      "strInstructions": "Season the chicken...",
+      "strMealThumb": "https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg"
+    }
+  ]
+}
+```
 
-- `/widgets-demo` → **WidgetsDemoScreen**  
-  Pantalla para probar distintos widgets intermedios como **GridView** y **TabBar**.
-
-- `/ciclo-vida` → **CicloVidaScreen**  
-  Pantalla que evidencia la ejecución de los métodos de ciclo de vida de un `StatefulWidget` (`initState`, `didChangeDependencies`, `build`, `setState`, `dispose`).
-
-### Comportamiento de `go`, `push` y `replace`
-- **go** → Cambia la ruta sin mantener historial (no aparece botón back).
-- **push** → Agrega la ruta al stack (aparece botón back en la AppBar).
-- **replace** → Reemplaza la ruta actual (no mantiene historial, similar a `go`).
+El servicio HTTP está encapsulado en `lib/services/api_service.dart` y maneja estados de carga, error y datos vacíos desde la `HomePage`.
 
 ---
 
-## Widgets Usados
-1. **GridView**
-    - Permite mostrar una lista de elementos en formato de cuadrícula.
-    - Se eligió porque organiza visualmente imágenes y botones de forma atractiva.
+## 🧱 Arquitectura del proyecto
 
-2. **TabBar + TabBarView**
-    - Implementa secciones en una sola pantalla con pestañas.
-    - Se eligió porque es útil para organizar contenidos diferentes en una misma vista, mejorando la experiencia de usuario.
-
-3. **ElevatedButton con imágenes e íconos**
-    - Botones con estilos personalizados que navegan a las diferentes rutas.
-    - Se eligieron porque hacen la navegación más intuitiva y atractiva.
-
-4. **StatefulWidget (Ciclo de vida)**
-    - En la pantalla de ciclo de vida, se usó un widget con estado para imprimir en consola los métodos principales.
-
----
-
-## Evidencia del ciclo de vida
-En la pantalla **CicloVidaScreen** se registran en consola los siguientes métodos del ciclo de vida:
-
-- `initState()`  
-  Se ejecuta una sola vez al inicializar el widget. Sirve para preparar datos iniciales.
-
-- `didChangeDependencies()`  
-  Se llama cuando cambian las dependencias del widget. Útil para acceder a información de contexto que pueda variar.
-
-- `build()`  
-  Se ejecuta cada vez que se construye/redibuja la interfaz gráfica.
-
-- `setState()`  
-  Se usa cuando se cambia el estado de una variable y se desea reconstruir la UI para reflejar el cambio.
-
-- `dispose()`  
-  Se ejecuta al destruir el widget, ideal para liberar recursos o cancelar streams.
-
-### Ejemplo de comentarios en el código:
-```dart
-@override
-void initState() {
-  super.initState();
-  print("initState: Se ejecuta al crear el widget por primera vez.");
-}
-
-@override
-void didChangeDependencies() {
-  super.didChangeDependencies();
-  print("didChangeDependencies: Se ejecuta cuando cambian las dependencias.");
-}
-
-@override
-Widget build(BuildContext context) {
-  print("build: Se ejecuta cada vez que se dibuja la interfaz.");
-  return Scaffold(...);
-}
-
-void _incrementarContador() {
-  setState(() {
-    contador++;
-    print("setState: Se actualiza el estado y se reconstruye la UI.");
-  });
-}
-
-@override
-void dispose() {
-  print("dispose: Se ejecuta al destruir el widget y limpiar recursos.");
-  super.dispose();
-}
-
- Estructura de carpetas
-
+```
 lib/
 ├── main.dart
 ├── routes/
-│   └── app_router.dart
-└── views/
-    ├── home/
-    │   └── home_screen.dart
-    ├── detalle/
-    │   └── detalle_screen.dart
-    ├── widgets_demo/
-    │   └── widgets_demo_screen.dart
-    └── ciclo_vida/
-        └── ciclo_vida_screen.dart
+│   └── app_router.dart         # Declaración central de go_router
+├── models/
+│   └── meal.dart               # Entidad utilizada en la vista de ejemplos
+├── services/
+│   └── api_service.dart        # Cliente HTTP para TheMealDB
+├── views/
+│   ├── home/                   # Listado principal (API) + detalle dinámico
+│   ├── meals/                  # Ejemplo con datos estáticos (Meal model)
+│   ├── async_demo/             # Uso de Future + estados de carga
+│   ├── isolate_demo/           # Ejecución de tarea pesada con isolate
+│   ├── timer_demo/             # Cronómetro con Timer.periodic
+│   ├── ciclo_vida/             # Demostración del ciclo de vida de un StatefulWidget
+│   ├── paso_parametros/        # Ejemplo de go/push/replace con parámetros
+│   ├── profile/                # Pantalla estática con layout de perfil
+│   ├── settings/               # Preferencias ficticias
+│   └── widgets_demo/           # Grid + TabBar/TabBarView
+└── widgets/
+    ├── custom_appbar.dart      # AppBar con navegación superior
+    ├── custom_drawer.dart      # Drawer lateral reutilizable
+    └── item_card.dart          # Card reutilizable para recetas
+```
 
- Ejecución
 
-1.Instalar dependencias:
+---
 
+## 🧭 Rutas y parámetros (go_router)
+
+| Ruta | Nombre | Widget | Parámetros |
+|------|--------|--------|------------|
+| `/` | `home` | `HomeScreen` | – |
+| `/paso_parametros` | `paso_parametros` | `PasoParametrosScreen` | – |
+| `/detalle/:valor/:metodo` | `detalle` | `DetalleScreen` | `valor` y `metodo` en `pathParameters` |
+| `/settings` | `settings` | `SettingsScreen` | – |
+| `/profile` | `profile` | `ProfileScreen` | – |
+| `/meals` | `meals` | `MealsListScreen` | – |
+| `/meal_detail` | `meal_detail` | `MealDetailScreen` | Objeto `Meal` vía `state.extra` |
+| `/widgets_demo` | `widgets_demo` | `WidgetsDemoScreen` | – |
+| `/ciclo_vida` | `ciclo_vida` | `CicloVidaScreen` | – |
+| `/async_demo` | `async_demo` | `AsyncDemoScreen` | – |
+| `/timer_demo` | `timer_demo` | `TimerDemoScreen` | – |
+| `/isolate_demo` | `isolate_demo` | `IsolateDemoScreen` | – |
+
+En la `HomePage` se muestran los resultados consumidos desde la API; al tocar cada card se navega mediante `Navigator.push` a `MealDetailPage` para presentar la ficha completa con chips, ingredientes y pasos.
+
+---
+
+## ⚙️ Estados de carga y manejo de errores
+
+- **Loading:** `CircularProgressIndicator` centralizado mientras se espera la respuesta HTTP.
+- **Error:** mensaje textual con el detalle del error (`snapshot.error`).
+- **Empty:** mensaje “No hay datos disponibles” cuando la API responde sin elementos.
+
+Las otras pantallas (`async_demo`, `timer_demo`, `isolate_demo`) exponen ejemplos controlados de asincronía, timers y cómputo en segundo plano.
+
+
+## ▶️ Ejecución
+
+```bash
 flutter pub get
+flutter run -d chrome      # o flutter run para dispositivo físico/emulador
+```
 
+## Capturas
+![alt text](<Captura de pantalla 2025-10-10 012455.png>)
+![alt text](<Captura de pantalla 2025-10-10 012520.png>)
 
-2.Ejecutar en dispositivo o navegador:
+## Checklist rápida
 
-flutter run
-
-
- Estilos
-
-El proyecto usa colores e imágenes con temática brasileña para dar un diseño atractivo y consistente:
-
-Amarillo y verde predominantes.
-
-Botones con íconos e imágenes decorativas.
-
-Estilo alegre y llamativo en las pantallas.
->>>>>>> cd8a3883f7a8519724e6b2b2c66da44b693f4876
+- [x] Consumo real de API externa (TheMealDB).
+- [x] Navegación declarativa con go_router y parámetros.
+- [x] Manejo de estados (carga, éxito, error, vacío).
+- [x] Demos adicionales (async, isolate, timer, ciclo de vida, widgets).
