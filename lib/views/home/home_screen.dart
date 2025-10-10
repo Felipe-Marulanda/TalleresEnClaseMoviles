@@ -8,10 +8,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomAppBar(title: 'API de Comidas 🍽️'),
-      drawer: CustomDrawer(),
-      body: HomePage(),
+    return Scaffold(
+      appBar: const CustomAppBar(title: 'Inicio 🌎'),
+      drawer: const CustomDrawer(),
+      body: const HomePage(),
     );
   }
 }
