@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+import '../../widgets/custom_appbar.dart';
+import '../../widgets/custom_drawer.dart';
+
 class TimerDemoScreen extends StatefulWidget {
   const TimerDemoScreen({super.key});
 
@@ -46,7 +49,8 @@ class _TimerDemoScreenState extends State<TimerDemoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Timer / Cronómetro")),
+      appBar: const CustomAppBar(title: 'Timer Demo'),
+      drawer: const CustomDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
