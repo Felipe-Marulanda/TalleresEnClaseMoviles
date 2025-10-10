@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/custom_appbar.dart';
+import '../../widgets/custom_drawer.dart';
+
 class WidgetsDemoScreen extends StatelessWidget {
   const WidgetsDemoScreen({super.key});
 
@@ -8,16 +11,16 @@ class WidgetsDemoScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blue[700],
-          title: const Text("🇧🇷 Widgets Demo", style: TextStyle(color: Colors.white)),
-          bottom: const TabBar(
+        appBar: const CustomAppBar(
+          title: 'Widgets Demo',
+          bottom: TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.grid_view), text: "Grid"),
-              Tab(icon: Icon(Icons.list), text: "Expansion"),
+              Tab(icon: Icon(Icons.grid_view), text: 'Grid'),
+              Tab(icon: Icon(Icons.list), text: 'Expansion'),
             ],
           ),
         ),
+        drawer: const CustomDrawer(),
         body: const TabBarView(
           children: [
             _GridDemo(),
@@ -58,7 +61,7 @@ class _GridDemo extends StatelessWidget {
             fit: StackFit.expand,
             children: [
               Image.asset(item["img"]!, fit: BoxFit.cover),
-              Container(color: Colors.black.withOpacity(0.4)),
+              Container(color: Colors.black.withAlpha((255 * 0.4).round())),
               Center(
                 child: Text(
                   item["title"]!,

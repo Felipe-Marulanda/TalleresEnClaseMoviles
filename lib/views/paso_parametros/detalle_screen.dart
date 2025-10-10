@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class DetalleScreen extends StatelessWidget {
   final String valor;
+  final String metodo;
 
-  const DetalleScreen({super.key, required this.valor});
+  const DetalleScreen({super.key, required this.valor, required this.metodo});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class DetalleScreen extends StatelessWidget {
             "assets/images/brasil_bandera.jpg",
             fit: BoxFit.cover,
           ),
-          Container(color: Colors.black.withOpacity(0.4)),
+          Container(color: Colors.black.withAlpha((255 * 0.4).round())),
           Center(
             child: Card(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -31,9 +32,9 @@ class DetalleScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Text(
-                  "Parámetro recibido: $valor",
+                  "Parametro recibido: $valor\nMetodo de navegacion: ${metodo.toUpperCase()}",
                   style: const TextStyle(
-                    fontSize: 22,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.green,
                   ),
