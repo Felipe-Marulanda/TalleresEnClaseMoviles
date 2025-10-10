@@ -29,38 +29,27 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: const Text('Inicio'),
             onTap: () {
-              //context.go('/'); // Navega a la ruta principal
-              //Reemplaza la ruta actual en la pila de navegación.
-              //No permite volver atrás automáticamente, ya que no agrega la nueva ruta a la pila.
-              //Útil para navegación sin historial, como en barra de navegación o cambiar de pestañas.
-              context.go('/'); // Navega a la ruta principal
-              Navigator.pop(context); // Cierra el drawer
+              final router = GoRouter.of(context);
+              Navigator.pop(context);
+              router.goNamed('home');
             },
           ),
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Configuración'),
             onTap: () {
-              //context.push(String route)
-              //Añade la nueva ruta a la pila de navegación.
-              //Permite volver atrás con context.pop().
-              //Ideal para flujos donde el usuario puede regresar, como navegar a una pantalla de detalles.
-              context.push(
-                '/settings',
-              ); // Navega a la pantalla de configuración
-              Navigator.pop(context); // Cierra el drawer
+              final router = GoRouter.of(context);
+              Navigator.pop(context);
+              router.pushNamed('settings');
             },
           ),
           ListTile(
             leading: const Icon(Icons.person),
             title: const Text('Perfil'),
             onTap: () {
-              //context.replace(String route)
-              //Similar a go(), pero en este caso reemplaza la ruta actual sin eliminar el historial anterior.
-              //Útil si quieres evitar que el usuario regrese a la pantalla anterior
-              //pero manteniendo la posibilidad de navegar hacia otras rutas en la pila
-              context.replace('/profile'); // Navega a la pantalla de perfil
-              Navigator.pop(context); // Cierra el drawer
+              final router = GoRouter.of(context);
+              Navigator.pop(context);
+              router.replaceNamed('profile');
             },
           ),
           //!PASO DE PARAMETROS
@@ -68,14 +57,18 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.input),
             title: const Text('Paso de Parámetros'),
             onTap: () {
-              context.go('/paso_parametros');
+              final router = GoRouter.of(context);
+              Navigator.pop(context);
+              router.goNamed('paso_parametros');
             },
           ),
           ListTile(
             leading: const Icon(Icons.loop),
             title: const Text('Ciclo de Vida'),
             onTap: () {
-              context.go('/ciclo_vida');
+              final router = GoRouter.of(context);
+              Navigator.pop(context);
+              router.goNamed('ciclo_vida');
             },
           ),
         ],

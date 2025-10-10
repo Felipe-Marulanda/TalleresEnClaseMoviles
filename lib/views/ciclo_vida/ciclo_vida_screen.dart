@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/custom_appbar.dart';
+import '../../widgets/custom_drawer.dart';
+
 class CicloVidaScreen extends StatefulWidget {
   const CicloVidaScreen({super.key});
 
@@ -13,30 +16,28 @@ class _CicloVidaScreenState extends State<CicloVidaScreen> {
   @override
   void initState() {
     super.initState();
-    print("initState() → se ejecuta al crear el widget");
+    debugPrint('initState() -> se ejecuta al crear el widget');
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    print("didChangeDependencies() → cuando cambian dependencias de contexto");
+    debugPrint('didChangeDependencies() -> cuando cambian dependencias de contexto');
   }
 
   @override
   void dispose() {
-    print("dispose() → cuando el widget se elimina");
+    debugPrint('dispose() -> cuando el widget se elimina');
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("build() → cada vez que se construye la UI");
+    debugPrint('build() -> cada vez que se construye la UI');
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green[800],
-        title: const Text("🇧🇷 Ciclo de Vida", style: TextStyle(color: Colors.white)),
-      ),
+      appBar: const CustomAppBar(title: 'Ciclo de Vida'),
+      drawer: const CustomDrawer(),
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -44,7 +45,7 @@ class _CicloVidaScreenState extends State<CicloVidaScreen> {
             "assets/images/cristo.jpg",
             fit: BoxFit.cover,
           ),
-          Container(color: Colors.black.withOpacity(0.5)),
+          Container(color: Colors.black.withAlpha((255 * 0.5).round())),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +63,7 @@ class _CicloVidaScreenState extends State<CicloVidaScreen> {
                   onPressed: () {
                     setState(() {
                       counter++;
-                      print("setState() → se llamó, se reconstruye el widget");
+                      debugPrint('setState() -> se llamo, se reconstruye el widget');
                     });
                   },
                   child: const Text("Incrementar"),

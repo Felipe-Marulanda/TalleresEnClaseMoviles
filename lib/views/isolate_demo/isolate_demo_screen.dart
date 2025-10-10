@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart'; // Para usar compute
 import 'package:go_router/go_router.dart';
+
 import '../../utils/heavy_task.dart';
+import '../../widgets/custom_appbar.dart';
+import '../../widgets/custom_drawer.dart';
 
 class IsolateDemoScreen extends StatefulWidget {
   const IsolateDemoScreen({super.key});
@@ -41,11 +44,8 @@ class _IsolateDemoScreenState extends State<IsolateDemoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Demo de Isolate 🇧🇷'),
-        backgroundColor: Colors.green[700],
-        foregroundColor: Colors.white,
-      ),
+      appBar: const CustomAppBar(title: 'Demo de Isolate'),
+      drawer: const CustomDrawer(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -71,7 +71,7 @@ class _IsolateDemoScreenState extends State<IsolateDemoScreen> {
                 ),
               const SizedBox(height: 40),
               ElevatedButton(
-                onPressed: () => context.go('/'),
+                onPressed: () => context.goNamed('home'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green[400],
                   foregroundColor: Colors.white,

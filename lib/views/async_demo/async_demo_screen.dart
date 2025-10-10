@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../services/fake_service.dart';
+import '../../widgets/custom_appbar.dart';
+import '../../widgets/custom_drawer.dart';
 
 class AsyncDemoScreen extends StatefulWidget {
   const AsyncDemoScreen({super.key});
@@ -20,7 +22,8 @@ class _AsyncDemoScreenState extends State<AsyncDemoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Asincronía – Future/async/await")),
+      appBar: const CustomAppBar(title: 'Async Future-await'),
+      drawer: const CustomDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

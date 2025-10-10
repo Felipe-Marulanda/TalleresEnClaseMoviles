@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:parqueadero_2025_g2/widgets/custom_drawer.dart';
+
+import '../../widgets/custom_appbar.dart';
+import '../../widgets/custom_drawer.dart';
 
 /// !PasoParametrosScreen - Pantalla de Paso de Parámetros
 /// es una vista/screen que permite ingresar un valor
@@ -33,19 +35,23 @@ class PasoParametrosScreenState extends State<PasoParametrosScreen> {
   /// recibe el tipo de navegación (go, push, replace)
   /// y redirige a la pantalla de detalle con el valor ingresado.
   void goToDetalle(String metodo) {
-    String valor = controller.text; // Capturamos el valor del campo de texto
+    final valor = controller.text.trim(); // Capturamos el valor del campo de texto
 
     if (valor.isEmpty) return; // Si el campo está vacio, no hacemos nada
 
+    final params = {'valor': valor, 'metodo': metodo};
+
+    final router = GoRouter.of(context);
+
     switch (metodo) {
       case 'go':
-        context.go('/detalle/$valor/$metodo');
+        router.goNamed('detalle', pathParameters: params);
         break;
       case 'push':
-        context.push('/detalle/$valor/$metodo');
+        router.pushNamed('detalle', pathParameters: params);
         break;
       case 'replace':
-        context.replace('/detalle/$valor/$metodo');
+        router.replaceNamed('detalle', pathParameters: params);
         break;
     }
   }
@@ -54,7 +60,7 @@ class PasoParametrosScreenState extends State<PasoParametrosScreen> {
   // *build es un metodo que retorna un widget
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Paso de Parámetros')),
+      appBar: const CustomAppBar(title: 'Paso de Parametros'),
       drawer: const CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
