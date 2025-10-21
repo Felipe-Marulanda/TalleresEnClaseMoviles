@@ -88,8 +88,8 @@ flutter build apk --release
 ## 6. Enlaces y Recursos
 
 ### Enlaces de Instalación
-- **Versión 1.0.0**: [Enlace Firebase - Por agregar]
-- **Versión 1.0.1**: [Enlace Firebase - Por agregar]
+- **Versión 1.0.0**: https://appdistribution.firebase.google.com/testerapps/1:797972785950:android:ce1a50fbb43de86aad370f/releases/6sd6bmod7jggg?utm_source=firebase-console
+- **Versión 1.0.1**: https://appdistribution.firebase.google.com/testerapps/1:797972785950:android:ce1a50fbb43de86aad370f/releases/356v6u03i9r8o?utm_source=firebase-console
 
 ### Archivos de Distribución
 - **release_info.txt**: Información detallada de la release
