@@ -1,13 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
+import 'app_http_client.dart';
 
 class ApiService {
   final String _baseUrl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
+  /// Fetch data from the public API. This uses `AppHttpClient` which will
+  /// automatically add Authorization header if a token is stored in secure
+  /// storage. No changes required by callers.
   Future<List<dynamic>> fetchData() async {
-    final response = await http.get(Uri.parse(_baseUrl));
+    final client = AppHttpClient();
+    final response = await client.get(Uri.parse(_baseUrl));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;

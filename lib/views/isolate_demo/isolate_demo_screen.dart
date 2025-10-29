@@ -45,7 +45,7 @@ class _IsolateDemoScreenState extends State<IsolateDemoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Demo de Isolate'),
-      drawer: const CustomDrawer(),
+  drawer: CustomDrawer(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16),

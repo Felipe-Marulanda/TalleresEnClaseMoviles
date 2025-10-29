@@ -13,7 +13,7 @@ class MealDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: meal.title),
-      drawer: const CustomDrawer(),
+  drawer: CustomDrawer(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(

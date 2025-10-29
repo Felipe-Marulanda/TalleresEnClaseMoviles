@@ -23,7 +23,7 @@ class _AsyncDemoScreenState extends State<AsyncDemoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Async Future-await'),
-      drawer: const CustomDrawer(),
+  drawer: CustomDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

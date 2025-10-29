@@ -50,7 +50,7 @@ class _TimerDemoScreenState extends State<TimerDemoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Timer Demo'),
-      drawer: const CustomDrawer(),
+  drawer: CustomDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Inicio 🌎'),
-      drawer: const CustomDrawer(),
+  drawer: CustomDrawer(),
       body: const HomePage(),
     );
   }
