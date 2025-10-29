@@ -9,7 +9,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Configuracion'),
-      drawer: const CustomDrawer(),
+  drawer: CustomDrawer(),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: const [

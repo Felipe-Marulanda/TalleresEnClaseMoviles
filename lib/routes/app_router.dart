@@ -13,6 +13,8 @@ import '../views/profile/profile_screen.dart';
 import '../views/settings/settings_screen.dart';
 import '../views/timer_demo/timer_demo_screen.dart';
 import '../views/widgets_demo/widgets_demo_screen.dart';
+import '../views/auth/login_screen.dart';
+import '../views/auth/evidence_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -21,6 +23,18 @@ final appRouter = GoRouter(
       path: '/',
       name: 'home',
       builder: (context, state) => const HomeScreen(),
+    ),
+
+    GoRoute(
+      path: '/login',
+      name: 'login',
+      builder: (context, state) => const LoginScreen(),
+    ),
+
+    GoRoute(
+      path: '/evidence',
+      name: 'evidence',
+      builder: (context, state) => const EvidenceScreen(),
     ),
 
     // Paso de parámetros

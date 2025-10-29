@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/auth_provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -71,6 +74,42 @@ class CustomDrawer extends StatelessWidget {
               router.goNamed('ciclo_vida');
             },
           ),
+          const Divider(),
+          // Auth / evidence
+          Consumer<AuthProvider>(builder: (context, auth, _) {
+            if (auth.isAuthenticated) {
+              return Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.verified_user),
+                    title: const Text('Evidencia (auth)'),
+                    onTap: () {
+                      final router = GoRouter.of(context);
+                      Navigator.pop(context);
+                      router.pushNamed('evidence');
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.logout),
+                    title: const Text('Cerrar sesión'),
+                    onTap: () async {
+                      await auth.logout();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+            }
+            return ListTile(
+              leading: const Icon(Icons.login),
+              title: const Text('Iniciar sesión'),
+              onTap: () {
+                final router = GoRouter.of(context);
+                Navigator.pop(context);
+                router.pushNamed('login');
+              },
+            );
+          }),
         ],
       ),
     );

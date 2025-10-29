@@ -20,7 +20,7 @@ class WidgetsDemoScreen extends StatelessWidget {
             ],
           ),
         ),
-        drawer: const CustomDrawer(),
+  drawer: CustomDrawer(),
         body: const TabBarView(
           children: [
             _GridDemo(),

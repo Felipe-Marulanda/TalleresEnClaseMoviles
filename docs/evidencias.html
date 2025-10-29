@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidencias de Distribución - Firebase App Distribution</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #4285f4;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #4285f4;
+            margin-bottom: 10px;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .info-table th, .info-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .info-table th {
+            background-color: #f2f2f2;
+        }
+        .section {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+        .section h2 {
+            color: #1976d2;
+            border-left: 4px solid #4285f4;
+            padding-left: 10px;
+        }
+        .evidence-img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            display: block;
+        }
+        .code-block {
+            background-color: #f5f5f5;
+            border-left: 4px solid #4285f4;
+            padding: 10px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        .checklist {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .checklist li {
+            margin-bottom: 5px;
+        }
+        .checklist li:before {
+            content: "☐ ";
+            font-weight: bold;
+            color: #4285f4;
+        }
+        .status-ok {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .status-pending {
+            color: #ffc107;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        @media print {
+            body { margin: 0; }
+            .page-break { page-break-before: always; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Evidencias de Distribución</h1>
+        <h2>Firebase App Distribution</h2>
+        <p><strong>Proyecto:</strong> Parqueadero 2025 G2 | <strong>Fecha:</strong> 20 de octubre de 2025</p>
+    </div>
+
+    <div class="section">
+        <h2>1. Información del Proyecto</h2>
+        <table class="info-table">
+            <tr><th>Campo</th><th>Valor</th></tr>
+            <tr><td>Repositorio</td><td>TalleresEnClaseMoviles</td></tr>
+            <tr><td>Rama de trabajo</td><td>feature/app_distribution</td></tr>
+            <tr><td>Responsable</td><td>Felipe Marulanda</td></tr>
+            <tr><td>Application ID</td><td>com.example.parqueadero_2025_g2</td></tr>
+            <tr><td>Versión inicial</td><td>1.0.0+1</td></tr>
+            <tr><td>Tamaño APK</td><td>108.4MB</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>2. Configuración del APK</h2>
+        <p><strong>Comando utilizado:</strong></p>
+        <div class="code-block">
+flutter clean<br>
+flutter pub get<br>
+flutter build apk --release
+        </div>
+        <p><strong>Resultado:</strong> <span class="status-ok">✓ APK generado exitosamente</span></p>
+    </div>
+
+    <div class="section page-break">
+        <h2>3. Evidencias de Firebase Console</h2>
+        
+        <h3>3.1 Panel de Releases - Versión 1.0.0</h3>
+        <img src="capturas/firebase_releases_v1.0.0.png" alt="Panel Releases" class="evidence-img">
+        
+        <h3>3.2 Configuración de Testers</h3>
+        <img src="capturas/firebase_testers_grupo.png" alt="Grupo QA_Clase" class="evidence-img">
+        <img src="capturas/firebase_tester_agregado.png" alt="Tester agregado" class="evidence-img">
+        
+        <h3>3.3 Distribución Exitosa</h3>
+        <img src="capturas/firebase_distribucion_exitosa.png" alt="Distribución exitosa" class="evidence-img">
+    </div>
+
+    <div class="section page-break">
+        <h2>4. Evidencias de Recepción por Tester</h2>
+        
+        <h3>4.1 Correo de Invitación</h3>
+        <img src="capturas/correo_invitacion_tester.png" alt="Correo de invitación" class="evidence-img">
+        
+        <h3>4.2 Instalación en Dispositivo</h3>
+        <img src="capturas/app_instalada_dispositivo.jpg" alt="App instalada" class="evidence-img">
+        <img src="capturas/app_pantalla_principal.jpg" alt="Pantalla principal" class="evidence-img">
+    </div>
+
+    <div class="section page-break">
+        <h2>5. Prueba de Actualización (1.0.0 → 1.0.1)</h2>
+        
+        <h3>5.1 Antes de la Actualización</h3>
+        <img src="capturas/firebase_releases_antes.png" alt="Releases antes" class="evidence-img">
+        
+        <h3>5.2 Después de la Actualización</h3>
+        <img src="capturas/firebase_releases_despues.png" alt="Releases después" class="evidence-img">
+        
+        <h3>5.3 Notificación de Actualización</h3>
+        <img src="capturas/notificacion_actualizacion.png" alt="Notificación" class="evidence-img">
+    </div>
+
+    <div class="section">
+        <h2>6. Bitácora de QA</h2>
+        
+        <h3>Versión 1.0.0</h3>
+        <table class="info-table">
+            <tr><th>Campo</th><th>Estado</th></tr>
+            <tr><td>Navegación GoRouter</td><td class="status-ok">✓ Funcionando</td></tr>
+            <tr><td>Carga datos API</td><td class="status-ok">✓ Funcionando</td></tr>
+            <tr><td>Async Demo</td><td class="status-ok">✓ Funcionando</td></tr>
+            <tr><td>Isolate Demo</td><td class="status-ok">✓ Funcionando</td></tr>
+            <tr><td>Timer Demo</td><td class="status-ok">✓ Funcionando</td></tr>
+            <tr><td>Paso parámetros</td><td class="status-ok">✓ Funcionando</td></tr>
+        </table>
+
+        <h3>Incidencias Reportadas</h3>
+        <p><em>No se reportaron incidencias en la versión 1.0.0</em></p>
+    </div>
+
+    <div class="section">
+        <h2>7. Checklist de Evidencias</h2>
+        
+        <h3>Capturas de Firebase Console</h3>
+        <ul class="checklist">
+            <li>Panel Releases con versión visible</li>
+            <li>Configuración de grupo QA_Clase</li>
+            <li>Tester dduran@uceva.edu.co agregado</li>
+            <li>Mensaje de distribución exitosa</li>
+            <li>Comparación antes/después actualización</li>
+        </ul>
+
+        <h3>Evidencias de Usuario Final</h3>
+        <ul class="checklist">
+            <li>Correo de invitación recibido</li>
+            <li>App instalada en dispositivo físico</li>
+            <li>Pantallas principales funcionando</li>
+            <li>Notificación de actualización</li>
+        </ul>
+
+        <h3>Documentación</h3>
+        <ul class="checklist">
+            <li>release_info.txt creado</li>
+            <li>Release notes detalladas</li>
+            <li>Bitácora de QA completada</li>
+            <li>PDF final generado</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>Documento generado para evidenciar el proceso de distribución con Firebase App Distribution</p>
+        <p>Parqueadero 2025 G2 - Felipe Marulanda - 20 de octubre de 2025</p>
+    </div>
+</body>
+</html>

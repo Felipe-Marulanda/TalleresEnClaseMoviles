@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../../widgets/custom_appbar.dart';
 import '../../widgets/custom_drawer.dart';
+import '../../providers/auth_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final auth = context.watch<AuthProvider>();
+    final name = auth.user?['name']?.toString() ?? 'Usuario invitado';
+    final email = auth.user?['email']?.toString() ?? 'invitado@correo.com';
+
     return Scaffold(
       appBar: const CustomAppBar(title: 'Perfil'),
-      drawer: const CustomDrawer(),
+  drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -17,18 +24,29 @@ class ProfileScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  child: const Icon(Icons.person, size: 48, color: Colors.white),
-                ),
+                Builder(builder: (ctx) {
+                  final avatarUrl = auth.user?['avatar']?.toString();
+                  if (avatarUrl != null && avatarUrl.isNotEmpty) {
+                    return CircleAvatar(
+                      radius: 40,
+                      backgroundImage: NetworkImage(avatarUrl),
+                    );
+                  }
+                  // fallback: initials from name
+                  final initials = (name.split(' ').where((s) => s.isNotEmpty).map((s) => s[0]).take(2).join()).toUpperCase();
+                  return CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    child: Text(initials, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                  );
+                }),
                 const SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text('Usuario invitado', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                    SizedBox(height: 4),
-                    Text('invitado@correo.com'),
+                  children: [
+                    Text(name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 4),
+                    Text(email),
                   ],
                 ),
               ],

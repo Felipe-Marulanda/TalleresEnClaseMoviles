@@ -1,9 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'routes/app_router.dart';
+import 'services/auth_service.dart';
+import 'providers/auth_provider.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Configure AuthService with your backend base URL if available.
+  // Example: AuthService(backendBaseUrl: 'https://api.yourdomain.com')
+  final authService = AuthService(backendBaseUrl: '');
+  final authProvider = AuthProvider(service: authService);
+  // Load persisted authentication state before the UI renders.
+  await authProvider.loadFromStorage();
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthProvider>.value(value: authProvider),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -1,0 +1,38 @@
+Repo: https://github.com/Felipe-Marulanda/TalleresEnClaseMoviles
+Rama: feature/app_distribution
+
+=== VERSIÓN 1.0.0 ===
+Enlace de instalación: https://appdistribution.firebase.google.com/testerapps/1:797972785950:android:ce1a50fbb43de86aad370f/releases/6sd6bmod7jggg?utm_source=firebase-console
+
+Release Notes v1.0.0:
+- Primera versión de la aplicación Parqueadero 2025 G2
+- Navegación con GoRouter implementada
+- Consumo de API TheMealDB
+- Pantallas: Home, Async Demo, Isolate Demo, Timer Demo, Settings, Profile
+- Layout responsivo con imágenes optimizadas
+
+Funciones principales a probar:
+- Navegación entre pantallas
+- Carga de datos de comidas desde API
+- Funcionamiento de demos (async, isolate, timer)
+- Paso de parámetros entre pantallas
+
+=== VERSIÓN 1.0.1 ===
+Enlace de instalación: https://appdistribution.firebase.google.com/testerapps/1:797972785950:android:ce1a50fbb43de86aad370f/releases/356v6u03i9r8o?utm_source=firebase-console
+
+Release Notes v1.0.1:
+- Actualización menor para prueba de distribución
+- Versión de prueba para validar sistema de actualización
+- Mismas funcionalidades que v1.0.0
+
+Funciones principales a probar:
+- Verificar notificación de actualización
+- Instalación sobre versión anterior
+- Funcionamiento correcto post-actualización
+
+Contacto QA: dduran@uceva.edu.co
+Application ID: com.example.parqueadero_2025_g2
+Tamaño APK: 108.4MB
+
+Fecha: 2025-10-20
+Responsable: Felipe Marulanda

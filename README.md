@@ -1,56 +1,109 @@
-TALLLER HTTP
+# Taller HTTP y Navegación con GoRouter
 
-}Descripción
+Aplicación Flutter que consume la API pública [TheMealDB](https://www.themealdb.com/) para mostrar un recetario, explica diferentes formas de navegación con **go_router** y reúne demos de asincronía, isolates, timers y ciclo de vida de widgets.
 
-Este proyecto es una aplicación Flutter que consume una API para mostrar platos de comida. Permite ver un listado de platos, detalles de cada plato y manejar estados de carga o error.
+---
 
-API
+## 🛰️ API consumida
 
-Endpoint principal: GET https://tuapi.com/platos
+- **Endpoint base:** `https://www.themealdb.com/api/json/v1/1/search.php?s=`
+- **Descripción:** devuelve un listado de recetas; el parámetro `s` permite filtrar por texto (vacío trae 25 recetas destacadas).
+- **Ejemplo de respuesta (fragmento):**
 
-Ejemplo de respuesta JSON:
+```json
+{
+  "meals": [
+    {
+      "idMeal": "52940",
+      "strMeal": "Brown Stew Chicken",
+      "strCategory": "Chicken",
+      "strArea": "Jamaican",
+      "strInstructions": "Season the chicken...",
+      "strMealThumb": "https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg"
+    }
+  ]
+}
+```
 
-[
-  {
-    "id": 1,
-    "nombre": "Spaghetti Bolognesa",
-    "descripcion": "Deliciosa pasta con salsa de carne",
-    "imagen": "https://linkaimagen.com/spaghetti.jpg"
-  },
-  {
-    "id": 2,
-    "nombre": "Ensalada César",
-    "descripcion": "Fresca ensalada con aderezo César",
-    "imagen": "https://linkaimagen.com/ensalada.jpg"
-  }
-]
+El servicio HTTP está encapsulado en `lib/services/api_service.dart` y maneja estados de carga, error y datos vacíos desde la `HomePage`.
 
-Arquitectura
+---
+
+## 🧱 Arquitectura del proyecto
+
+```
 lib/
- ├─ models/      # Definición de clases de datos (Plato, Usuario, etc.)
- ├─ services/    # Lógica para consumir la API
- ├─ views/       # Pantallas de la app (Home, Detalle, etc.)
- ├─ config/      # Configuraciones globales (URLs, constantes)
+├── main.dart
+├── routes/
+│   └── app_router.dart         # Declaración central de go_router
+├── models/
+│   └── meal.dart               # Entidad utilizada en la vista de ejemplos
+├── services/
+│   └── api_service.dart        # Cliente HTTP para TheMealDB
+├── views/
+│   ├── home/                   # Listado principal (API) + detalle dinámico
+│   ├── meals/                  # Ejemplo con datos estáticos (Meal model)
+│   ├── async_demo/             # Uso de Future + estados de carga
+│   ├── isolate_demo/           # Ejecución de tarea pesada con isolate
+│   ├── timer_demo/             # Cronómetro con Timer.periodic
+│   ├── ciclo_vida/             # Demostración del ciclo de vida de un StatefulWidget
+│   ├── paso_parametros/        # Ejemplo de go/push/replace con parámetros
+│   ├── profile/                # Pantalla estática con layout de perfil
+│   ├── settings/               # Preferencias ficticias
+│   └── widgets_demo/           # Grid + TabBar/TabBarView
+└── widgets/
+    ├── custom_appbar.dart      # AppBar con navegación superior
+    ├── custom_drawer.dart      # Drawer lateral reutilizable
+    └── item_card.dart          # Card reutilizable para recetas
+```
 
-Rutas con go_router
 
-/ → Pantalla principal con listado de platos.
+---
 
-/detalle/:id → Pantalla de detalle de plato.
-Parámetros enviados: id del plato.
+## 🧭 Rutas y parámetros (go_router)
 
-Ejemplo de navegación:
+| Ruta | Nombre | Widget | Parámetros |
+|------|--------|--------|------------|
+| `/` | `home` | `HomeScreen` | – |
+| `/paso_parametros` | `paso_parametros` | `PasoParametrosScreen` | – |
+| `/detalle/:valor/:metodo` | `detalle` | `DetalleScreen` | `valor` y `metodo` en `pathParameters` |
+| `/settings` | `settings` | `SettingsScreen` | – |
+| `/profile` | `profile` | `ProfileScreen` | – |
+| `/meals` | `meals` | `MealsListScreen` | – |
+| `/meal_detail` | `meal_detail` | `MealDetailScreen` | Objeto `Meal` vía `state.extra` |
+| `/widgets_demo` | `widgets_demo` | `WidgetsDemoScreen` | – |
+| `/ciclo_vida` | `ciclo_vida` | `CicloVidaScreen` | – |
+| `/async_demo` | `async_demo` | `AsyncDemoScreen` | – |
+| `/timer_demo` | `timer_demo` | `TimerDemoScreen` | – |
+| `/isolate_demo` | `isolate_demo` | `IsolateDemoScreen` | – |
 
-context.go('/detalle/${plato.id}');
+En la `HomePage` se muestran los resultados consumidos desde la API; al tocar cada card se navega mediante `Navigator.push` a `MealDetailPage` para presentar la ficha completa con chips, ingredientes y pasos.
 
-Estados
+---
 
-Carga: Indicador mientras se reciben datos.
+## ⚙️ Estados de carga y manejo de errores
 
-Error: Mensaje si falla la petición a la API.
+- **Loading:** `CircularProgressIndicator` centralizado mientras se espera la respuesta HTTP.
+- **Error:** mensaje textual con el detalle del error (`snapshot.error`).
+- **Empty:** mensaje “No hay datos disponibles” cuando la API responde sin elementos.
 
-Vacío: Mensaje si no hay datos disponibles.
+Las otras pantallas (`async_demo`, `timer_demo`, `isolate_demo`) exponen ejemplos controlados de asincronía, timers y cómputo en segundo plano.
 
-Capturas
-<img width="1914" height="954" alt="Captura de pantalla 2025-10-10 012455" src="https://github.com/user-attachments/assets/2fe34e1d-1d96-4bfb-b88d-ed558fc73a3a" />
-<img width="1913" height="1072" alt="Captura de pantalla 2025-10-10 012520" src="https://github.com/user-attachments/assets/61325dc4-e625-48e2-8728-4ef4c7744e74" />
+
+## ▶️ Ejecución
+
+```bash
+flutter pub get
+flutter run -d chrome      # o flutter run para dispositivo físico/emulador
+```
+
+## Capturas
+![alt text](<Captura de pantalla 2025-10-10 012455.png>)
+![alt text](<Captura de pantalla 2025-10-10 012520.png>)
+
+## Checklist rápida
+
+- [x] Consumo real de API externa (TheMealDB).
+- [x] Navegación declarativa con go_router y parámetros.
+- [x] Manejo de estados (carga, éxito, error, vacío).
+- [x] Demos adicionales (async, isolate, timer, ciclo de vida, widgets).

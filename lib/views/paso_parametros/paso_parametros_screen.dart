@@ -61,7 +61,7 @@ class PasoParametrosScreenState extends State<PasoParametrosScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Paso de Parametros'),
-      drawer: const CustomDrawer(),
+  drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
