@@ -12,11 +12,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Future<List<dynamic>> _dataFuture;
+  bool _initialized = false;
 
   @override
   void initState() {
     super.initState();
-    _dataFuture = ApiService().fetchData();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_initialized) {
+      _dataFuture = ApiService().fetchData();
+      _initialized = true;
+    }
   }
 
   @override
@@ -29,7 +38,65 @@ class _HomePageState extends State<HomePage> {
         }
 
         if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          // Don't show raw exception to users. Provide a friendly message and
+          // an optional Details button for debugging.
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Card(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.wifi_off, size: 48, color: Colors.grey),
+                      const SizedBox(height: 12),
+                      Text('No se pudieron cargar las recetas', style: Theme.of(context).textTheme.titleMedium),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Revisa tu conexión a internet o inténtalo de nuevo más tarde.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ElevatedButton.icon(
+                            icon: const Icon(Icons.refresh),
+                            label: const Text('Reintentar'),
+                            onPressed: () {
+                              setState(() {
+                                _dataFuture = ApiService().fetchData();
+                              });
+                            },
+                          ),
+                          const SizedBox(width: 8),
+                          TextButton(
+                            child: const Text('Detalles'),
+                            onPressed: () {
+                              final details = snapshot.error?.toString() ?? 'Sin detalles';
+                              showDialog<void>(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  title: const Text('Detalles técnicos'),
+                                  content: SingleChildScrollView(child: Text(details)),
+                                  actions: [
+                                    TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cerrar')),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
         }
 
         if (!snapshot.hasData || snapshot.data!.isEmpty) {

@@ -37,7 +37,7 @@ class _CicloVidaScreenState extends State<CicloVidaScreen> {
 
     return Scaffold(
       appBar: const CustomAppBar(title: 'Ciclo de Vida'),
-      drawer: const CustomDrawer(),
+  drawer: CustomDrawer(),
       body: Stack(
         fit: StackFit.expand,
         children: [

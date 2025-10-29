@@ -12,7 +12,7 @@ class MealsListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Recetario brasileno'),
-      drawer: const CustomDrawer(),
+  drawer: CustomDrawer(),
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: sampleMeals.length,
