@@ -75,6 +75,17 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           const Divider(),
+          // Firebase / Universidades
+          ListTile(
+            leading: const Icon(Icons.school, color: Colors.blue),
+            title: const Text('Universidades'),
+            onTap: () {
+              final router = GoRouter.of(context);
+              Navigator.pop(context);
+              router.goNamed('universidades');
+            },
+          ),
+          const Divider(),
           // Auth / evidence
           Consumer<AuthProvider>(builder: (context, auth, _) {
             if (auth.isAuthenticated) {

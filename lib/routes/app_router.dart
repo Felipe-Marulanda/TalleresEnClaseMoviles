@@ -15,6 +15,8 @@ import '../views/timer_demo/timer_demo_screen.dart';
 import '../views/widgets_demo/widgets_demo_screen.dart';
 import '../views/auth/login_screen.dart';
 import '../views/auth/evidence_screen.dart';
+import '../views/universidades/universidades_screen.dart';
+import '../views/universidades/nueva_universidad_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -117,6 +119,19 @@ final appRouter = GoRouter(
       path: '/isolate_demo',
       name: 'isolate_demo',
       builder: (context, state) => const IsolateDemoScreen(),
+    ),
+
+    // Universidades
+    GoRoute(
+      path: '/universidades',
+      name: 'universidades',
+      builder: (context, state) => const UniversidadesScreen(),
+    ),
+
+    GoRoute(
+      path: '/nueva_universidad',
+      name: 'nueva_universidad',
+      builder: (context, state) => const NuevaUniversidadScreen(),
     ),
   ],
 

@@ -107,3 +107,29 @@ flutter run -d chrome      # o flutter run para dispositivo físico/emulador
 - [x] Navegación declarativa con go_router y parámetros.
 - [x] Manejo de estados (carga, éxito, error, vacío).
 - [x] Demos adicionales (async, isolate, timer, ciclo de vida, widgets).
+
+---
+
+## 🔥 Firebase - Gestión de Universidades
+
+Se añadió integración completa con Firebase/Firestore para gestionar una colección de universidades:
+
+- **Colección Firestore:** `universidades` con campos: nit, nombre, direccion, telefono, pagina_web
+- **Operaciones CRUD:** Crear, listar (stream tiempo real), eliminar universidades
+- **Validaciones:** NIT único, formato de teléfono y URL válida
+- **UI:** Listado en tiempo real y formulario de creación con validación
+
+Cómo probar:
+
+1. Ejecuta la app: `flutter run`
+2. Abre el Drawer → `Universidades`
+3. Crea nuevas universidades usando el botón "Nueva"
+4. Observa cómo la lista se actualiza en tiempo real
+5. Prueba eliminar una universidad (con confirmación)
+
+Archivos principales:
+- `lib/models/universidad.dart` - Modelo de datos
+- `lib/services/universidad_service.dart` - Servicio Firebase CRUD
+- `lib/views/universidades/` - Pantallas de listado y formulario
+
+Para evidencia técnica completa y capturas, revisa `docs/EVIDENCIAS_FIREBASE.md` o su versión imprimible `docs/EVIDENCIAS_FIREBASE_PRINT.html`.
