@@ -2,6 +2,8 @@ import 'package:go_router/go_router.dart';
 
 import '../models/meal.dart';
 import '../views/async_demo/async_demo_screen.dart';
+import '../views/categoria_fb/categoria_fb_form_view.dart';
+import '../views/categoria_fb/categoria_fb_list_view.dart';
 import '../views/ciclo_vida/ciclo_vida_screen.dart';
 import '../views/home/home_screen.dart';
 import '../views/isolate_demo/isolate_demo_screen.dart';
@@ -118,7 +120,28 @@ final appRouter = GoRouter(
       name: 'isolate_demo',
       builder: (context, state) => const IsolateDemoScreen(),
     ),
-  ],
 
+    // Categorías Firebase
+    GoRoute(
+      path: '/categoriasFirebase',
+      name: 'categoriasFirebase',
+      builder: (_, __) => const CategoriaFbListView(),
+    ),
+
+    GoRoute(
+      path: '/categoriasfb/create',
+      name: 'categoriasfb.create',
+      builder: (context, state) => const CategoriaFbFormView(),
+    ),
+    
+    GoRoute(
+      path: '/categoriasfb/edit/:id',
+      name: 'categorias.edit',
+      builder: (context, state) {
+        final id = state.pathParameters['id']!;
+        return CategoriaFbFormView(id: id);
+      },
+    ),
+  ],
 );
 

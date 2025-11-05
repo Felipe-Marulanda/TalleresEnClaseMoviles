@@ -107,3 +107,26 @@ flutter run -d chrome      # o flutter run para dispositivo físico/emulador
 - [x] Navegación declarativa con go_router y parámetros.
 - [x] Manejo de estados (carga, éxito, error, vacío).
 - [x] Demos adicionales (async, isolate, timer, ciclo de vida, widgets).
+
+---
+
+## 🔥 Firebase - Gestión de Categorías
+
+Se añadió integración completa con Firebase/Firestore para gestionar una colección de categorías:
+
+- **Colección Firestore:** `categorias` con campos: nombre, descripcion
+- **Operaciones CRUD:** Crear, listar (stream tiempo real), editar, eliminar categorías
+- **UI:** Listado en tiempo real y formulario de creación/edición con validación
+
+Cómo probar:
+
+1. Ejecuta la app: `flutter run`
+2. Abre el Drawer → `Categorías Firebase`
+3. Crea nuevas categorías usando el botón "+"
+4. Observa cómo la lista se actualiza en tiempo real
+5. Edita o elimina categorías existentes
+
+Archivos principales:
+- `lib/models/categoria_fb.dart` - Modelo de datos
+- `lib/models/categoria_service.dart` - Servicio Firebase CRUD
+- `lib/views/categoria_fb/` - Pantallas de listado y formulario

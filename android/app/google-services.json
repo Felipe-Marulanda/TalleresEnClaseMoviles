@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "817332476039",
+    "project_id": "talleruniversidades",
+    "storage_bucket": "talleruniversidades.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817332476039:android:d984867ae9b01fdad34022",
+        "android_client_info": {
+          "package_name": "com.example.parqueadero_2025_g2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAI2385SDi3PYvFoKwvP8JZhFZo9RiEcy0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
