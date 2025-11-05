@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Evidencias Firebase - Módulo Universidades (Printable)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+    :root{--bg:#fff;--muted:#6b7280;--accent:#3b82f6;--success:#10b981;--mono:#1f2937}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:32px; color:#111827; line-height:1.6}
+    header{border-bottom:2px solid var(--accent);padding-bottom:16px;margin-bottom:24px}
+    h1{font-size:32px;margin:8px 0;color:var(--accent)}
+    h2{font-size:22px;color:#1f2937;margin:20px 0 12px 0;border-left:4px solid var(--accent);padding-left:12px}
+    h3{font-size:18px;color:var(--accent);margin:16px 0 8px 0}
+    p,li{line-height:1.6;color:#374151}
+    .muted{color:var(--muted)}
+    .success{color:var(--success);font-weight:600}
+    pre{background:#0f172a;color:#e6eef8;padding:16px;border-radius:8px;overflow:auto;margin:12px 0}
+    code{background:#f3f4f6;padding:2px 6px;border-radius:4px;font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace}
+    .highlight{background:#fef3c7;padding:12px;border-left:4px solid #f59e0b;border-radius:6px;margin:12px 0}
+    .tech-stack{background:#f0f9ff;border:1px solid #0ea5e9;border-radius:8px;padding:16px;margin:16px 0}
+    .checklist{background:#f0fdf4;border:1px solid #22c55e;border-radius:8px;padding:16px;margin:16px 0}
+    .checklist li{list-style:none;position:relative;padding-left:24px}
+    .checklist li:before{content:'✅';position:absolute;left:0}
+    table{border-collapse:collapse;width:100%;margin:16px 0}
+    th,td{border:1px solid #e5e7eb;padding:8px 12px;text-align:left}
+    th{background:#f9fafb;font-weight:600}
+    footer{font-size:12px;color:var(--muted);margin-top:32px;border-top:1px dashed #e5e7eb;padding-top:12px}
+    @media print{ body{margin:18mm} header{page-break-after:avoid} pre{font-size:10px} h2{page-break-after:avoid} }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔥 Evidencias Firebase - Módulo Universidades</h1>
+    <div class="muted">Documento técnico del módulo Flutter + Firebase para gestión de universidades. 
+    <br>Exportar este archivo a PDF: abrir en navegador → Ctrl+P → Guardar como PDF.</div>
+  </header>
+
+  <main>
+
+    <section class="tech-stack">
+      <h2>📋 Resumen del Módulo</h2>
+      <p><strong>Objetivo:</strong> Desarrollar un módulo en Flutter que integre Firebase y cree/gestione la colección <code>universidades</code> con operaciones CRUD en tiempo real.</p>
+      <p><strong>Tecnologías implementadas:</strong></p>
+      <ul>
+        <li>Flutter 3.3.0+</li>
+        <li>Firebase Core 3.15.2</li>
+        <li>Cloud Firestore 5.6.12</li>
+        <li>Provider para gestión de estado</li>
+        <li>GoRouter para navegación</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🏗️ Arquitectura del Código</h2>
+      
+      <h3>Estructura de Archivos</h3>
+      <pre>lib/
+├── firebase_options.dart           # Configuración Firebase
+├── models/
+│   └── universidad.dart           # Modelo de datos Universidad
+├── services/
+│   └── universidad_service.dart   # Servicio CRUD Firebase
+├── views/universidades/
+│   ├── universidades_screen.dart  # Listado con Stream tiempo real
+│   └── nueva_universidad_screen.dart # Formulario de creación
+└── routes/
+    └── app_router.dart            # Rutas: /universidades, /nueva_universidad</pre>
+
+      <h3>Modelo de Datos Firestore</h3>
+      <table>
+        <tr>
+          <th>Campo</th>
+          <th>Tipo</th>
+          <th>Descripción</th>
+          <th>Ejemplo</th>
+        </tr>
+        <tr>
+          <td>nit</td>
+          <td>string</td>
+          <td>Número de identificación tributaria</td>
+          <td>890.123.456-7</td>
+        </tr>
+        <tr>
+          <td>nombre</td>
+          <td>string</td>
+          <td>Nombre completo de la universidad</td>
+          <td>Universidad Central del Valle</td>
+        </tr>
+        <tr>
+          <td>direccion</td>
+          <td>string</td>
+          <td>Dirección física completa</td>
+          <td>Cra 27A #48-144, Tuluá - Valle</td>
+        </tr>
+        <tr>
+          <td>telefono</td>
+          <td>string</td>
+          <td>Número telefónico con código país</td>
+          <td>+57 602 2242202</td>
+        </tr>
+        <tr>
+          <td>pagina_web</td>
+          <td>string</td>
+          <td>URL oficial de la universidad</td>
+          <td>https://www.uceva.edu.co</td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="checklist">
+      <h2>🔧 Funcionalidades Implementadas</h2>
+      
+      <h3>1. Conexión Firebase</h3>
+      <ul class="checklist">
+        <li>Inicialización en <code>main.dart</code></li>
+        <li>Configuración multiplataforma (<code>firebase_options.dart</code>)</li>
+        <li>Integración con Cloud Firestore</li>
+      </ul>
+
+      <h3>2. Operaciones CRUD</h3>
+      <ul class="checklist">
+        <li><strong>Crear:</strong> Formulario con validación, verificación NIT duplicado</li>
+        <li><strong>Listar:</strong> Stream en tiempo real, ordenamiento por nombre</li>
+        <li><strong>Eliminar:</strong> Confirmación antes de eliminar, actualización inmediata</li>
+      </ul>
+
+      <h3>3. Validaciones</h3>
+      <ul class="checklist">
+        <li>NIT: formato <code>^\d{3,9}[-.]?\d{1}$</code></li>
+        <li>Teléfono: formato <code>^[\+]?[\d\s\-\(\)]{7,15}$</code></li>
+        <li>URL: esquema http/https obligatorio</li>
+        <li>Campos requeridos: todos los campos son obligatorios</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📊 Datos de Prueba</h2>
+      
+      <div class="highlight">
+        <strong>Universidad de Ejemplo 1:</strong><br>
+        NIT: 890.123.456-7<br>
+        Nombre: Universidad Central del Valle (UCEVA)<br>
+        Dirección: Cra 27A #48-144, Tuluá - Valle del Cauca<br>
+        Teléfono: +57 602 2242202<br>
+        Página Web: https://www.uceva.edu.co
+      </div>
+
+      <div class="highlight">
+        <strong>Universidad de Ejemplo 2:</strong><br>
+        NIT: 860.006.502-1<br>
+        Nombre: Universidad Nacional de Colombia<br>
+        Dirección: Carrera 45 # 26-85, Bogotá D.C.<br>
+        Teléfono: +57 1 3165000<br>
+        Página Web: https://unal.edu.co
+      </div>
+    </section>
+
+    <section>
+      <h2>🛠️ Comandos de Verificación</h2>
+      
+      <h3>Setup del Proyecto</h3>
+      <pre># Instalar dependencias
+flutter pub get
+
+# Verificar configuración  
+flutter analyze
+
+# Ejecutar en modo debug
+flutter run
+
+# Ejecutar tests
+flutter test</pre>
+
+      <h3>Flujo de Prueba Manual</h3>
+      <ol>
+        <li>Abrir la app en emulador/dispositivo</li>
+        <li>Ir al Drawer → "Universidades"</li>
+        <li>Crear una nueva universidad con datos válidos</li>
+        <li>Verificar que aparece inmediatamente en la lista</li>
+        <li>Intentar crear con NIT duplicado (debe fallar)</li>
+        <li>Eliminar una universidad (con confirmación)</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>🔍 Casos de Uso Verificados</h2>
+      
+      <table>
+        <tr>
+          <th>Caso de Uso</th>
+          <th>Estado</th>
+          <th>Observaciones</th>
+        </tr>
+        <tr>
+          <td>Crear Universidad Válida</td>
+          <td class="success">✅ Implementado</td>
+          <td>Todos los campos validados, guardado en Firestore</td>
+        </tr>
+        <tr>
+          <td>Validar Campos Vacíos</td>
+          <td class="success">✅ Implementado</td>
+          <td>Mensajes de error específicos por campo</td>
+        </tr>
+        <tr>
+          <td>Validar NIT Duplicado</td>
+          <td class="success">✅ Implementado</td>
+          <td>Verificación antes de guardar</td>
+        </tr>
+        <tr>
+          <td>Stream Tiempo Real</td>
+          <td class="success">✅ Implementado</td>
+          <td>Lista se actualiza automáticamente</td>
+        </tr>
+        <tr>
+          <td>Eliminar con Confirmación</td>
+          <td class="success">✅ Implementado</td>
+          <td>Dialog de confirmación antes de eliminar</td>
+        </tr>
+        <tr>
+          <td>Estados de Loading/Error</td>
+          <td class="success">✅ Implementado</td>
+          <td>UI responsiva con feedback visual</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>📋 Checklist de Evidencia</h2>
+      
+      <h3>Para Capturas de Pantalla</h3>
+      <ul>
+        <li>☐ Configuración Firebase en consola</li>
+        <li>☐ Dependencias en <code>pubspec.yaml</code></li>
+        <li>☐ Listado vacío (estado inicial)</li>
+        <li>☐ Formulario de nueva universidad</li>
+        <li>☐ Validaciones fallando (campos vacíos/formatos incorrectos)</li>
+        <li>☐ Universidad creada exitosamente</li>
+        <li>☐ Listado con universidades (tiempo real)</li>
+        <li>☐ Eliminación con confirmación</li>
+        <li>☐ Colección <code>universidades</code> en Firestore Console</li>
+      </ul>
+
+      <h3>Para Revisión de Código</h3>
+      <ul>
+        <li>☐ <code>lib/models/universidad.dart</code> - Modelo de datos</li>
+        <li>☐ <code>lib/services/universidad_service.dart</code> - Servicio CRUD</li>
+        <li>☐ <code>lib/views/universidades/universidades_screen.dart</code> - UI principal</li>
+        <li>☐ <code>lib/views/universidades/nueva_universidad_screen.dart</code> - Formulario</li>
+        <li>☐ <code>lib/firebase_options.dart</code> - Configuración Firebase</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📝 Notas Técnicas</h2>
+      
+      <div class="highlight">
+        <strong>Configuración Firebase:</strong> Se usa configuración de demo para desarrollo local. 
+        Para producción, reemplazar con credenciales reales del proyecto Firebase.
+      </div>
+
+      <div class="highlight">
+        <strong>Seguridad:</strong> Las rules de Firestore están configuradas de forma permisiva para desarrollo. 
+        En producción se debe implementar autenticación y rules estrictas.
+      </div>
+
+      <div class="highlight">
+        <strong>Performance:</strong> Stream optimizado con <code>orderBy('nombre')</code> y queries eficientes. 
+        UI responsiva con estados de carga apropiados.
+      </div>
+    </section>
+
+    <footer>
+      <strong>Documento generado:</strong> Noviembre 2025 · 
+      <strong>Rama:</strong> feature/taller_firebase_universidades · 
+      <strong>Estado:</strong> <span class="success">Desarrollo completado</span>
+    </footer>
+
+  </main>
+</body>
+</html>

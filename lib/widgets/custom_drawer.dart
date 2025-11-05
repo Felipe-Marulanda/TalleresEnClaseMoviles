@@ -75,6 +75,17 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           const Divider(),
+          // Firebase
+          ListTile(
+            leading: const Icon(Icons.category, color: Colors.orange),
+            title: const Text('Categorías Firebase'),
+            onTap: () {
+              final router = GoRouter.of(context);
+              Navigator.pop(context);
+              router.goNamed('categoriasFirebase');
+            },
+          ),
+          const Divider(),
           // Auth / evidence
           Consumer<AuthProvider>(builder: (context, auth, _) {
             if (auth.isAuthenticated) {
@@ -96,6 +107,11 @@ class CustomDrawer extends StatelessWidget {
                       await auth.logout();
                       Navigator.pop(context);
                     },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.cloud),
+                    title: const Text('Categorías Firebase'),
+                    onTap: () => context.pushNamed('categoriasFirebase'),
                   ),
                 ],
               );
