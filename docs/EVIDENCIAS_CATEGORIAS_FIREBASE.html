@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidencias - Módulo Categorías Firebase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-card strong {
+            color: #667eea;
+        }
+
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin: 40px 0 20px 0;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: #764ba2;
+            margin: 25px 0 15px 0;
+            font-size: 1.3em;
+        }
+
+        h4 {
+            color: #495057;
+            margin: 20px 0 10px 0;
+            font-size: 1.1em;
+        }
+
+        .highlight {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+            margin: 15px 0;
+        }
+
+        .success {
+            background: #e8f5e8;
+            border-left-color: #4caf50;
+        }
+
+        .warning {
+            background: #fff3e0;
+            border-left-color: #ff9800;
+        }
+
+        .code {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .feature-list li:before {
+            content: "✅ ";
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .metric-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .screenshot {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .screenshot-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .architecture-diagram {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tech-badge {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            color: #666;
+        }
+
+        @media print {
+            body { background: white; }
+            .container { box-shadow: none; }
+            .page-break { page-break-before: always; }
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1> Evidencias - Módulo Categorías Firebase</h1>
+            <div class="info-grid">
+                <div class="info-card">
+                    <strong>Proyecto:</strong> Talleres Móviles - Flutter
+                </div>
+                <div class="info-card">
+                    <strong>Fecha:</strong> 4 de Noviembre, 2025
+                </div>
+                <div class="info-card">
+                    <strong>Desarrollador:</strong> Felipe Marulanda
+                </div>
+                <div class="info-card">
+                    <strong>Rama:</strong> feature/firebase
+                </div>
+            </div>
+        </div>
+
+        <!-- RESUMEN EJECUTIVO -->
+        <h2> Resumen Ejecutivo</h2>
+        <div class="highlight success">
+            <p>Se ha implementado exitosamente un <strong>módulo completo de gestión de categorías</strong> integrado con <strong>Firebase Firestore</strong> para una aplicación Flutter. El módulo permite la gestión de información empresarial con campos específicos: NIT, nombre, dirección, teléfono y página web.</p>
+        </div>
+
+        <h3>Funcionalidades Implementadas</h3>
+        <ul class="feature-list">
+            <li><strong>Listado en tiempo real</strong> de categorías desde Firebase</li>
+            <li><strong>Creación</strong> de nuevas categorías con validación completa</li>
+            <li><strong>Edición</strong> de categorías existentes</li>
+            <li><strong>Eliminación</strong> con confirmación de seguridad</li>
+            <li><strong>Interfaz responsiva</strong> (móvil, tablet, desktop)</li>
+            <li><strong>Sincronización automática</strong> con Firebase</li>
+            <li><strong>Navegación integrada</strong> con GoRouter</li>
+        </ul>
+
+        <!-- MÉTRICAS DEL PROYECTO -->
+        <h2> Métricas del Proyecto</h2>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <span class="metric-number">1,157+</span>
+                <div class="metric-label">Líneas de Código</div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-number">5</span>
+                <div class="metric-label">Campos de Datos</div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-number">4</span>
+                <div class="metric-label">Operaciones CRUD</div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-number">2</span>
+                <div class="metric-label">Vistas Principales</div>
+            </div>
+        </div>
+
+        <!-- CONFIGURACIÓN FIREBASE -->
+        <h2> Configuración de Firebase</h2>
+        <div class="highlight">
+            <h4>Integración Completa</h4>
+            <div class="tech-stack">
+                <span class="tech-badge">Firebase Core 3.15.2</span>
+                <span class="tech-badge">Cloud Firestore 5.6.12</span>
+                <span class="tech-badge">Web Platform</span>
+                <span class="tech-badge">Android Platform</span>
+                <span class="tech-badge">iOS Platform</span>
+            </div>
+        </div>
+
+        <!-- ESTRUCTURA DE DATOS -->
+        <h2> Estructura de Datos</h2>
+        <h3>Colección: categorias</h3>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>nit</strong></td>
+                        <td>String</td>
+                        <td>Número de Identificación Tributaria</td>
+                        <td>123456770</td>
+                    </tr>
+                    <tr>
+                        <td><strong>nombre</strong></td>
+                        <td>String</td>
+                        <td>Nombre de la empresa/organización</td>
+                        <td>UCEVA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>direccion</strong></td>
+                        <td>String</td>
+                        <td>Dirección física</td>
+                        <td>CALLE 23 #37-01</td>
+                    </tr>
+                    <tr>
+                        <td><strong>telefono</strong></td>
+                        <td>String</td>
+                        <td>Número de teléfono</td>
+                        <td>3124789565</td>
+                    </tr>
+                    <tr>
+                        <td><strong>pagina_web</strong></td>
+                        <td>String</td>
+                        <td>URL del sitio web</td>
+                        <td>https://www.uceva.edu.co</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- CAPTURAS DE PANTALLA -->
+        <div class="page-break"></div>
+        <h2> Capturas de la Aplicación</h2>
+
+        <div class="screenshot-grid">
+            <div class="screenshot-container">
+                <h3>🔸 Panel de Navegación</h3>
+                <img src="capturas/menu_principal.png" alt="Menú Principal" class="screenshot">
+                <ul class="feature-list">
+                    <li>Menú lateral con navegación completa</li>
+                    <li>Opción "Categorías Firebase" destacada</li>
+                    <li>Diseño Material Design 3</li>
+                </ul>
+            </div>
+
+            <div class="screenshot-container">
+                <h3>🔸 Listado de Categorías</h3>
+                <img src="capturas/lista_categorias.png" alt="Lista de Categorías" class="screenshot">
+                <ul class="feature-list">
+                    <li>Vista móvil optimizada con cards Material Design</li>
+                    <li>Información completa: Nombre, NIT, dirección, teléfono</li>
+                    <li>Iconografía: Iconos de empresa, ubicación y teléfono</li>
+                    <li>Acciones: Botón de eliminación por elemento</li>
+                    <li>Botón flotante "Nueva" para agregar categorías</li>
+                </ul>
+            </div>
+
+            <div class="screenshot-container">
+                <h3>🔸 Formulario de Edición</h3>
+                <img src="capturas/formulario_edicion.png" alt="Formulario de Edición" class="screenshot">
+                <ul class="feature-list">
+                    <li>Campos completos: NIT, Nombre, Dirección, Teléfono, Página Web</li>
+                    <li>Iconografía descriptiva para cada campo</li>
+                    <li>Validación visual en tiempo real</li>
+                    <li>Botones de acción: "Guardar" y "Cancelar"</li>
+                </ul>
+            </div>
+
+            <div class="screenshot-container">
+                <h3>🔸 Consola de Firebase</h3>
+                <img src="capturas/firebase_console.png" alt="Firebase Console" class="screenshot">
+                <ul class="feature-list">
+                    <li>Colección "categorias" creada y poblada</li>
+                    <li>Documentos con estructura correcta</li>
+                    <li>Sincronización activa entre app y Firebase</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ARQUITECTURA TÉCNICA -->
+        <div class="page-break"></div>
+        <h2> Arquitectura Técnica</h2>
+        
+        <div class="architecture-diagram">
+            <h3>Patrón: Clean Architecture + Provider</h3>
+            <div class="code">
+lib/
+├── models/
+│   ├── categoria_fb.dart          # Modelo de datos
+│   └── categoria_service.dart     # Servicio Firebase
+├── views/
+│   └── categoria_fb/
+│       ├── categoria_fb_list_view.dart   # Vista de listado
+│       └── categoria_fb_form_view.dart   # Formulario CRUD
+├── widgets/
+│   └── custom_drawer.dart         # Navegación lateral
+└── routes/
+    └── app_router.dart            # Configuración de rutas
+            </div>
+        </div>
+
+        <h3>Capas de la Arquitectura</h3>
+        <div class="highlight">
+            <h4>🔹 Capa de Datos (Data Layer)</h4>
+            <ul>
+                <li><strong>Firebase Firestore:</strong> Base de datos NoSQL en tiempo real</li>
+                <li><strong>CategoriaService:</strong> Operaciones CRUD con streams reactivos</li>
+                <li><strong>Modelo CategoriaFb:</strong> Entidad de datos con serialización</li>
+            </ul>
+        </div>
+
+        <div class="highlight">
+            <h4> Capa de Presentación (Presentation Layer)</h4>
+            <ul>
+                <li><strong>Widgets Stateless/Stateful:</strong> UI reactiva</li>
+                <li><strong>Material Design 3:</strong> Componentes modernos</li>
+                <li><strong>Responsive Design:</strong> Adaptable a diferentes pantallas</li>
+            </ul>
+        </div>
+
+        <div class="highlight">
+            <h4> Capa de Navegación</h4>
+            <ul>
+                <li><strong>GoRouter:</strong> Navegación declarativa y type-safe</li>
+                <li><strong>Rutas:</strong> /categoriasfb, /categoriasfb/create, /categoriasfb/edit/:id</li>
+            </ul>
+        </div>
+
+        <!-- OPERACIONES CRUD -->
+        <h2> Implementación de Funcionalidades</h2>
+
+        <h3>Operaciones CRUD Completas</h3>
+        
+        <h4>CREATE - Creación</h4>
+        <div class="code">
+static Future&lt;void&gt; addCategoria(CategoriaFb categoria) async {
+  await _ref.add(categoria.toMap());
+}
+        </div>
+
+        <h4>READ - Lectura en Tiempo Real</h4>
+        <div class="code">
+static Stream&lt;List&lt;CategoriaFb&gt;&gt; watchCategorias() {
+  return _ref.snapshots().map((snapshot) {
+    return snapshot.docs
+        .map((doc) =&gt; CategoriaFb.fromMap(doc.id, doc.data()))
+        .toList();
+  });
+}
+        </div>
+
+        <h4>UPDATE - Actualización</h4>
+        <div class="code">
+static Future&lt;void&gt; updateCategoria(CategoriaFb categoria) async {
+  await _ref.doc(categoria.id).update(categoria.toMap());
+}
+        </div>
+
+        <h4>DELETE - Eliminación</h4>
+        <div class="code">
+static Future&lt;void&gt; deleteCategoria(String id) async {
+  await _ref.doc(id).delete();
+}
+        </div>
+
+        <!-- VALIDACIONES -->
+        <h2>✅ Validaciones y Controles</h2>
+
+        <h3>Validación de Formularios</h3>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>Validación</th>
+                        <th>Mensaje de Error</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>NIT</td>
+                        <td>Requerido</td>
+                        <td>"El NIT es requerido"</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Requerido</td>
+                        <td>"El nombre es requerido"</td>
+                    </tr>
+                    <tr>
+                        <td>Dirección</td>
+                        <td>Requerido</td>
+                        <td>"La dirección es requerida"</td>
+                    </tr>
+                    <tr>
+                        <td>Teléfono</td>
+                        <td>Requerido</td>
+                        <td>"El teléfono es requerido"</td>
+                    </tr>
+                    <tr>
+                        <td>Página Web</td>
+                        <td>Formato URL</td>
+                        <td>"Ingrese una URL válida"</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Controles de Seguridad</h3>
+        <div class="highlight warning">
+            <h4> Confirmación de Eliminación</h4>
+            <ul>
+                <li>Diálogo modal con información del elemento</li>
+                <li>Botones de confirmación explícitos</li>
+                <li>Mensaje de advertencia sobre irreversibilidad</li>
+            </ul>
+        </div>
+
+        <div class="highlight">
+            <h4> Manejo de Errores</h4>
+            <ul>
+                <li>Try-catch en operaciones Firebase</li>
+                <li>SnackBar informativos para el usuario</li>
+                <li>Estados de carga y error en la UI</li>
+            </ul>
+        </div>
+
+        <!-- TECNOLOGÍAS -->
+        <h2> Stack Tecnológico</h2>
+        <div class="tech-stack">
+            <span class="tech-badge">Flutter 3.24.5</span>
+            <span class="tech-badge">Dart 3.5.4</span>
+            <span class="tech-badge">Firebase Core 3.15.2</span>
+            <span class="tech-badge">Cloud Firestore 5.6.12</span>
+            <span class="tech-badge">GoRouter</span>
+            <span class="tech-badge">Material Design 3</span>
+        </div>
+
+        <!-- CONCLUSIONES -->
+        <h2> Conclusiones</h2>
+
+        <div class="highlight success">
+            <h3>✅ Objetivos Alcanzados</h3>
+            <ul class="feature-list">
+                <li><strong>Integración Firebase Completa:</strong> Configuración exitosa y conectividad estable</li>
+                <li><strong>Módulo de Gestión Empresarial:</strong> CRUD completo con validaciones robustas</li>
+                <li><strong>Interfaz de Usuario Moderna:</strong> Material Design 3 responsivo</li>
+                <li><strong>Arquitectura Escalable:</strong> Código mantenible y reutilizable</li>
+            </ul>
+        </div>
+
+        <h3> Beneficios Técnicos</h3>
+        <ul>
+            <li><strong>Tiempo Real:</strong> Sincronización automática con Firebase</li>
+            <li><strong>Offline Capability:</strong> Firestore maneja cache local automáticamente</li>
+            <li><strong>Escalabilidad:</strong> Arquitectura preparada para crecimiento</li>
+            <li><strong>Maintainability:</strong> Código limpio y bien estructurado</li>
+            <li><strong>User Experience:</strong> Interfaz moderna y responsiva</li>
+        </ul>
+
+        <div class="highlight">
+            <h3> Impacto del Proyecto</h3>
+            <p>El módulo de Categorías Firebase representa una <strong>base sólida</strong> para la gestión de información empresarial en aplicaciones móviles. La implementación demuestra:</p>
+            <ul>
+                <li><strong>Competencia técnica</strong> en desarrollo Flutter avanzado</li>
+                <li><strong>Integración exitosa</strong> con servicios cloud de Google</li>
+                <li><strong>Diseño centrado en el usuario</strong> con Material Design 3</li>
+                <li><strong>Arquitectura profesional</strong> preparada para producción</li>
+            </ul>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <h3> Información del Documento</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <strong>Repositorio:</strong> https://github.com/Felipe-Marulanda/TalleresEnClaseMoviles
+                </div>
+                <div class="info-card">
+                    <strong>Owner:</strong> Felipe-Marulanda
+                </div>
+                <div class="info-card">
+                    <strong>Rama:</strong> feature/firebase
+                </div>
+                <div class="info-card">
+                    <strong>Creado:</strong> 4 de Noviembre, 2025
+                </div>
+            </div>
+            <p style="margin-top: 20px;">
+                <strong> Tecnologías:</strong> Flutter + Firebase + Material Design 3<br>
+                <strong> Desarrollador:</strong> Felipe Marulanda
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Script para impresión optimizada
+        window.addEventListener('beforeprint', function() {
+            document.body.style.background = 'white';
+        });
+    </script>
+</body>
+</html>

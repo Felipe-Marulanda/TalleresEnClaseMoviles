@@ -110,26 +110,23 @@ flutter run -d chrome      # o flutter run para dispositivo físico/emulador
 
 ---
 
-## 🔥 Firebase - Gestión de Universidades
+## 🔥 Firebase - Gestión de Categorías
 
-Se añadió integración completa con Firebase/Firestore para gestionar una colección de universidades:
+Se añadió integración completa con Firebase/Firestore para gestionar una colección de categorías:
 
-- **Colección Firestore:** `universidades` con campos: nit, nombre, direccion, telefono, pagina_web
-- **Operaciones CRUD:** Crear, listar (stream tiempo real), eliminar universidades
-- **Validaciones:** NIT único, formato de teléfono y URL válida
-- **UI:** Listado en tiempo real y formulario de creación con validación
+- **Colección Firestore:** `categorias` con campos: nombre, descripcion
+- **Operaciones CRUD:** Crear, listar (stream tiempo real), editar, eliminar categorías
+- **UI:** Listado en tiempo real y formulario de creación/edición con validación
 
 Cómo probar:
 
 1. Ejecuta la app: `flutter run`
-2. Abre el Drawer → `Universidades`
-3. Crea nuevas universidades usando el botón "Nueva"
+2. Abre el Drawer → `Categorías Firebase`
+3. Crea nuevas categorías usando el botón "+"
 4. Observa cómo la lista se actualiza en tiempo real
-5. Prueba eliminar una universidad (con confirmación)
+5. Edita o elimina categorías existentes
 
 Archivos principales:
-- `lib/models/universidad.dart` - Modelo de datos
-- `lib/services/universidad_service.dart` - Servicio Firebase CRUD
-- `lib/views/universidades/` - Pantallas de listado y formulario
-
-Para evidencia técnica completa y capturas, revisa `docs/EVIDENCIAS_FIREBASE.md` o su versión imprimible `docs/EVIDENCIAS_FIREBASE_PRINT.html`.
+- `lib/models/categoria_fb.dart` - Modelo de datos
+- `lib/models/categoria_service.dart` - Servicio Firebase CRUD
+- `lib/views/categoria_fb/` - Pantallas de listado y formulario

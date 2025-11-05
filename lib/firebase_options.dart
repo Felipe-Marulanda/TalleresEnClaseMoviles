@@ -41,46 +41,47 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'demo-api-key-web',
-    appId: '1:demo:web:demo',
-    messagingSenderId: 'demo-sender',
-    projectId: 'talleres-moviles-demo',
-    authDomain: 'talleres-moviles-demo.firebaseapp.com',
-    storageBucket: 'talleres-moviles-demo.appspot.com',
+    apiKey: 'AIzaSyBDwEspnNThXx1LV-Z-hNLe47B-k8V_-8U',
+    appId: '1:817332476039:web:fad44a08e71d97d2d34022',
+    messagingSenderId: '817332476039',
+    projectId: 'talleruniversidades',
+    authDomain: 'talleruniversidades.firebaseapp.com',
+    storageBucket: 'talleruniversidades.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'demo-api-key-android',
-    appId: '1:demo:android:demo',
-    messagingSenderId: 'demo-sender',
-    projectId: 'talleres-moviles-demo',
-    storageBucket: 'talleres-moviles-demo.appspot.com',
+    apiKey: 'AIzaSyAI2385SDi3PYvFoKwvP8JZhFZo9RiEcy0',
+    appId: '1:817332476039:android:d984867ae9b01fdad34022',
+    messagingSenderId: '817332476039',
+    projectId: 'talleruniversidades',
+    storageBucket: 'talleruniversidades.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'demo-api-key-ios',
-    appId: '1:demo:ios:demo',
-    messagingSenderId: 'demo-sender',
-    projectId: 'talleres-moviles-demo',
-    storageBucket: 'talleres-moviles-demo.appspot.com',
+    apiKey: 'AIzaSyD6siiMx4f-9fHTHjJNfA0bZ7nnY0Q0Q78',
+    appId: '1:817332476039:ios:ac44934afcff7063d34022',
+    messagingSenderId: '817332476039',
+    projectId: 'talleruniversidades',
+    storageBucket: 'talleruniversidades.firebasestorage.app',
     iosBundleId: 'com.example.parqueadero2025G2',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'demo-api-key-macos',
-    appId: '1:demo:macos:demo',
-    messagingSenderId: 'demo-sender',
-    projectId: 'talleres-moviles-demo',
-    storageBucket: 'talleres-moviles-demo.appspot.com',
+    apiKey: 'AIzaSyD6siiMx4f-9fHTHjJNfA0bZ7nnY0Q0Q78',
+    appId: '1:817332476039:ios:ac44934afcff7063d34022',
+    messagingSenderId: '817332476039',
+    projectId: 'talleruniversidades',
+    storageBucket: 'talleruniversidades.firebasestorage.app',
     iosBundleId: 'com.example.parqueadero2025G2',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'demo-api-key-windows',
-    appId: '1:demo:windows:demo',
-    messagingSenderId: 'demo-sender',
-    projectId: 'talleres-moviles-demo',
-    authDomain: 'talleres-moviles-demo.firebaseapp.com',
-    storageBucket: 'talleres-moviles-demo.appspot.com',
+    apiKey: 'AIzaSyBDwEspnNThXx1LV-Z-hNLe47B-k8V_-8U',
+    appId: '1:817332476039:web:93714a580ecfb018d34022',
+    messagingSenderId: '817332476039',
+    projectId: 'talleruniversidades',
+    authDomain: 'talleruniversidades.firebaseapp.com',
+    storageBucket: 'talleruniversidades.firebasestorage.app',
   );
+
 }

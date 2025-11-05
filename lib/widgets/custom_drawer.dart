@@ -75,14 +75,14 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           const Divider(),
-          // Firebase / Universidades
+          // Firebase
           ListTile(
-            leading: const Icon(Icons.school, color: Colors.blue),
-            title: const Text('Universidades'),
+            leading: const Icon(Icons.category, color: Colors.orange),
+            title: const Text('Categorías Firebase'),
             onTap: () {
               final router = GoRouter.of(context);
               Navigator.pop(context);
-              router.goNamed('universidades');
+              router.goNamed('categoriasFirebase');
             },
           ),
           const Divider(),
@@ -107,6 +107,11 @@ class CustomDrawer extends StatelessWidget {
                       await auth.logout();
                       Navigator.pop(context);
                     },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.cloud),
+                    title: const Text('Categorías Firebase'),
+                    onTap: () => context.pushNamed('categoriasFirebase'),
                   ),
                 ],
               );

@@ -2,6 +2,8 @@ import 'package:go_router/go_router.dart';
 
 import '../models/meal.dart';
 import '../views/async_demo/async_demo_screen.dart';
+import '../views/categoria_fb/categoria_fb_form_view.dart';
+import '../views/categoria_fb/categoria_fb_list_view.dart';
 import '../views/ciclo_vida/ciclo_vida_screen.dart';
 import '../views/home/home_screen.dart';
 import '../views/isolate_demo/isolate_demo_screen.dart';
@@ -15,8 +17,6 @@ import '../views/timer_demo/timer_demo_screen.dart';
 import '../views/widgets_demo/widgets_demo_screen.dart';
 import '../views/auth/login_screen.dart';
 import '../views/auth/evidence_screen.dart';
-import '../views/universidades/universidades_screen.dart';
-import '../views/universidades/nueva_universidad_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -121,19 +121,27 @@ final appRouter = GoRouter(
       builder: (context, state) => const IsolateDemoScreen(),
     ),
 
-    // Universidades
+    // Categorías Firebase
     GoRoute(
-      path: '/universidades',
-      name: 'universidades',
-      builder: (context, state) => const UniversidadesScreen(),
+      path: '/categoriasFirebase',
+      name: 'categoriasFirebase',
+      builder: (_, __) => const CategoriaFbListView(),
     ),
 
     GoRoute(
-      path: '/nueva_universidad',
-      name: 'nueva_universidad',
-      builder: (context, state) => const NuevaUniversidadScreen(),
+      path: '/categoriasfb/create',
+      name: 'categoriasfb.create',
+      builder: (context, state) => const CategoriaFbFormView(),
+    ),
+    
+    GoRoute(
+      path: '/categoriasfb/edit/:id',
+      name: 'categorias.edit',
+      builder: (context, state) {
+        final id = state.pathParameters['id']!;
+        return CategoriaFbFormView(id: id);
+      },
     ),
   ],
-
 );
 
