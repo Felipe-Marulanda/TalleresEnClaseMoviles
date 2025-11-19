@@ -74,6 +74,15 @@ class CustomDrawer extends StatelessWidget {
               router.goNamed('ciclo_vida');
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.task_alt, color: Colors.blue),
+            title: const Text('ToDo App'),
+            onTap: () {
+              final router = GoRouter.of(context);
+              Navigator.pop(context);
+              router.goNamed('tasks');
+            },
+          ),
           const Divider(),
           // Firebase
           ListTile(
@@ -107,11 +116,6 @@ class CustomDrawer extends StatelessWidget {
                       await auth.logout();
                       Navigator.pop(context);
                     },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.cloud),
-                    title: const Text('Categorías Firebase'),
-                    onTap: () => context.pushNamed('categoriasFirebase'),
                   ),
                 ],
               );

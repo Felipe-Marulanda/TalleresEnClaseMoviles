@@ -17,6 +17,7 @@ import '../views/timer_demo/timer_demo_screen.dart';
 import '../views/widgets_demo/widgets_demo_screen.dart';
 import '../views/auth/login_screen.dart';
 import '../views/auth/evidence_screen.dart';
+import '../todo/views/simple_todo_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -141,6 +142,13 @@ final appRouter = GoRouter(
         final id = state.pathParameters['id']!;
         return CategoriaFbFormView(id: id);
       },
+    ),
+
+    // ToDo App
+    GoRoute(
+      path: '/tasks',
+      name: 'tasks',
+      builder: (context, state) => const SimpleTodoScreen(),
     ),
   ],
 );

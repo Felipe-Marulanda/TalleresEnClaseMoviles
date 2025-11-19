@@ -22,10 +22,14 @@ Future<void> main() async {
   // Load persisted authentication state before the UI renders.
   await authProvider.loadFromStorage();
 
+  // Initialize ToDo app dependencies (simplified for demo)
+  // For a full implementation, you would need to properly set up all data sources
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthProvider>.value(value: authProvider),
+        // TODO: Add TaskProvider when full implementation is ready
       ],
       child: const MyApp(),
     ),

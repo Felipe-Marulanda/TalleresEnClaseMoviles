@@ -28,9 +28,61 @@ class ItemCard extends StatelessWidget {
               child: Image.network(
                 imageUrl,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => Container(
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Container(
+                    color: Colors.grey[100],
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                            : null,
+                      ),
+                    ),
+                  );
+                },
+                errorBuilder: (context, error, stackTrace) => Container(
                   color: Colors.grey[200],
-                  child: const Center(child: Icon(Icons.image_not_supported)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.image_not_supported, 
+                           size: 32, 
+                           color: Colors.grey[500]),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Imagen no disponible',
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          else
+            AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Container(
+                color: Colors.grey[100],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.restaurant, 
+                         size: 48, 
+                         color: Colors.grey[400]),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Sin imagen',
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
